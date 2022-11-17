@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-export default function UseCallApi<T>(url: string) {
+export default function useCallApi<T>(url: string) {
   const [responce, setResponce] = useState<T | null>(null);
 
   useEffect(() => {

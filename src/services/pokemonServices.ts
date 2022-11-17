@@ -7,7 +7,6 @@ const fetchPokemons = async (): Promise<IPokemonList | null> => {
       "https://pokeapi.co/api/v2/pokemon"
     );
     const { data } = res;
-    console.log("data", data);
     return data;
   } catch (e) {
     console.error("[fetchPokemons] Error When we try to fetch Pokemons", e);
