@@ -1,19 +1,22 @@
-import { useAppSelector } from "../store/hooks";
+import { IPokemonNamesAndUrls } from "../types";
+import NavigationActions from "./NavigationActions";
 import PokemonCard from "./PokemonCard";
-import Spinner from "./Spinner";
 
-function Pokemons() {
-  const { pokemonsList, loading } = useAppSelector((state) => state.app);
-
+interface propsType {
+  pokemons: IPokemonNamesAndUrls[];
+}
+function Pokemons({ pokemons }: propsType) {
   return (
-    <div className="flex justify-center gap-4 w-full flex-wrap pt-8 pb-8">
-      {pokemonsList?.results?.map(({ url }, idx) => (
-        <div key={idx}>
-          <PokemonCard url={url} />
-        </div>
-      ))}
-      {loading && <Spinner />}
-    </div>
+    <>
+      <div className="flex justify-center gap-4 w-full flex-wrap pt-8 pb-8">
+        {pokemons.map(({ url }, idx) => (
+          <div key={idx}>
+            <PokemonCard url={url} />
+          </div>
+        ))}
+      </div>
+      <NavigationActions />
+    </>
   );
 }
 

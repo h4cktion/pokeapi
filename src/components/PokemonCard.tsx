@@ -2,7 +2,7 @@ import { IPokemon } from "pokeapi-typescript";
 import { getColorByType, isFavorite } from "../helpers/cardHelpers";
 import { addToFavorites, removeToFavorites } from "../reducers/appSlice";
 import { useAppDispatch, useAppSelector } from "../store/hooks";
-import useCallApi from "../hooks/UseCallApi";
+import useCallApi from "../hooks/useCallApi";
 
 interface propsType {
   url: string;
@@ -21,6 +21,7 @@ function PokemonCard({ url }: propsType) {
       dispatch(addToFavorites(id));
     }
   };
+
   return (
     <>
       {details && (
@@ -40,7 +41,7 @@ function PokemonCard({ url }: propsType) {
             {details.types.map((type, idx) => (
               <span
                 key={idx}
-                className="px-4 py-1 text-xs rounded-full"
+                className="px-4 py-1 text-xs rounded-full text-white"
                 style={{ background: `${getColorByType(type.type.name)}` }}
               >
                 {type.type.name}

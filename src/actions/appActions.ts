@@ -3,7 +3,7 @@ import services from "../services/pokemonServices";
 
 export const fetchPokemons = createAsyncThunk(
   "admin/fetchClientList",
-  async () => {
-    return await services.fetchPokemons();
+  async (url: string) => {
+    return await services.fetchPokemons(url);
   }
 );

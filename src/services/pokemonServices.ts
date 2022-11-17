@@ -1,11 +1,9 @@
 import axios from "axios";
 import { IPokemonList } from "../types";
 
-const fetchPokemons = async (): Promise<IPokemonList | null> => {
+const fetchPokemons = async (url: string): Promise<IPokemonList | null> => {
   try {
-    const res = await axios.get<IPokemonList>(
-      "https://pokeapi.co/api/v2/pokemon"
-    );
+    const res = await axios.get<IPokemonList>(url);
     const { data } = res;
     return data;
   } catch (e) {
