@@ -15,7 +15,7 @@ function PokemonCard({ url }: propsType) {
   const isInFavorites = isFavorite(favorites, url);
 
   const init = async () => {
-    const pokemonDetails = await services.fetchPokemon(url);
+    const pokemonDetails = await services.fetchDataFromUrl<IPokemon>(url);
     if (pokemonDetails) {
       setDetails(pokemonDetails);
     }
