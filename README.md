@@ -4,6 +4,8 @@ Little project using ReactJS, TypeScript, Tailwindcss, The PokeApi and more
 
 ## Getting Started
 
+Node version 18.12.1
+
 ```bash
 npm install
 # or
