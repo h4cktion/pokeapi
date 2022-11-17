@@ -2,7 +2,7 @@ import { IPokemon } from "pokeapi-typescript";
 import { getColorByType, isFavorite } from "../helpers/cardHelpers";
 import { addToFavorites, removeToFavorites } from "../reducers/appSlice";
 import { useAppDispatch, useAppSelector } from "../store/hooks";
-import useCallApi from "../hooks/useCallApi";
+import { useEffect, useState } from "react";
 
 interface propsType {
   url: string;
@@ -10,8 +10,14 @@ interface propsType {
 function PokemonCard({ url }: propsType) {
   const dispatch = useAppDispatch();
   const { favorites } = useAppSelector((state) => state.app);
-  const details: IPokemon | null = useCallApi(url);
+  const [details, setDetails] = useState<IPokemon | null>(null);
   const isInFavorites = isFavorite(favorites, url);
+
+  useEffect(() => {
+    fetch(url)
+      .then((res) => res.json())
+      .then((data) => setDetails(data));
+  }, [url]);
 
   const addOrRemoveOfFavorites = (event: any) => {
     const { id } = event.target;
