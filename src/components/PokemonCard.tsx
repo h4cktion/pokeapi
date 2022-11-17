@@ -3,6 +3,7 @@ import { getColorByType, isFavorite } from "../helpers/cardHelpers";
 import { addToFavorites, removeToFavorites } from "../reducers/appSlice";
 import { useAppDispatch, useAppSelector } from "../store/hooks";
 import { useEffect, useState } from "react";
+import services from "../services/pokemonServices";
 
 interface propsType {
   url: string;
@@ -13,10 +14,14 @@ function PokemonCard({ url }: propsType) {
   const [details, setDetails] = useState<IPokemon | null>(null);
   const isInFavorites = isFavorite(favorites, url);
 
+  const init = async () => {
+    const pokemonDetails = await services.fetchPokemon(url);
+    if (pokemonDetails) {
+      setDetails(pokemonDetails);
+    }
+  };
   useEffect(() => {
-    fetch(url)
-      .then((res) => res.json())
-      .then((data) => setDetails(data));
+    init();
   }, [url]);
 
   const addOrRemoveOfFavorites = (event: any) => {
